@@ -25,7 +25,27 @@ def main():
     )
     galton_path = Path("galton.csv")
     df_galton_families = ds.read_file(file_name=galton_path)
+    print("Analysis of entire data file")
+    print()
     ds.dataframe_info(df=df_galton_families, file_in=galton_path)
+    print("Analysis of female children")
+    print()
+    df_galton_female_children = df_galton_families[
+        df_galton_families["child_sex"] == "F"
+    ]
+    ds.dataframe_info(
+        df=df_galton_female_children,
+        file_in=galton_path
+    )
+    print("Analysis of male children")
+    print()
+    df_galton_male_children = df_galton_families[
+        df_galton_families["child_sex"] == "M"
+    ]
+    ds.dataframe_info(
+        df=df_galton_male_children,
+        file_in=galton_path
+    )
     stop_time = time.perf_counter()
     ds.script_summary(
         script_path=Path(__file__),
